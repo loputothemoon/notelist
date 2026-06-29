@@ -31,15 +31,14 @@ export default function Editor({ noteId, initialTitle = '', initialContent = '' 
     ],
   }
 
-  // Fungsi untuk mengubah judul menjadi slug
   const generateSlug = (text: string) => {
     return text
       .toString()
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, '-')        // Ganti spasi dengan -
-      .replace(/[^\w\-]+/g, '')    // Hapus karakter non-word selain -
-      .replace(/\-\-+/g, '-');     // Ganti multiple - dengan single -
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-');
   }
 
   const handleSave = async () => {
@@ -53,7 +52,7 @@ export default function Editor({ noteId, initialTitle = '', initialContent = '' 
       const slug = generateSlug(title)
 
       if (noteId) {
-        // UPDATE (Edit)
+        // Edit Catatan
         const { error } = await supabase
           .from('notes')
           .update({ title, content, slug })
@@ -62,7 +61,7 @@ export default function Editor({ noteId, initialTitle = '', initialContent = '' 
         if (error) throw error
         alert('Catatan berhasil diperbarui!')
       } else {
-        // INSERT (Catatan Baru)
+        // Catatan Baru
         const { error } = await supabase
           .from('notes')
           .insert([{ title, content, slug }])
@@ -96,7 +95,7 @@ export default function Editor({ noteId, initialTitle = '', initialContent = '' 
           className="w-full sm:max-w-md px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
         />
         
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
           <button 
             onClick={handleClear}
             className="px-4 py-2 text-xs font-semibold rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all"

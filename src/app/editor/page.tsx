@@ -5,7 +5,6 @@ export default function EditorPage() {
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-900 py-6 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-5xl mx-auto space-y-4">
-        {/* Tombol Kembali */}
         <div>
           <Link 
             href="/" 
@@ -15,7 +14,6 @@ export default function EditorPage() {
           </Link>
         </div>
 
-        {/* Area Editor */}
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
           <Editor />
         </div>

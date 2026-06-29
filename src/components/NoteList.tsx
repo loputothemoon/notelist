@@ -5,7 +5,6 @@ export default async function NoteList() {
   const supabase = await createClient()
   const { data: notes } = await supabase.from('notes').select('*').order('created_at', { ascending: false })
 
-  // Jika belum ada catatan sama sekali
   if (!notes || notes.length === 0) {
     return (
       <div className="p-4 text-center text-sm text-slate-500 dark:text-slate-400">
@@ -17,10 +16,9 @@ export default async function NoteList() {
   return (
     <div className="flex flex-col gap-4">
       {notes.map((note) => (
-        /* Mengganti tag <div> menjadi <Link> agar bisa diklik dan pindah halaman */
         <Link 
-          key={note.slug} 
-          href={`/editor/${note.slug || note.id}`} // Fallback ke id jika slug belum ada di catatan lama
+          key={note.id} 
+          href={`/editor/${note.slug || note.id}`}
           className="group block p-5 bg-white dark:bg-slate-800/80 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700/50 cursor-pointer transition-all duration-300 hover:shadow-md hover:border-blue-500/30 hover:bg-slate-50 dark:hover:bg-slate-700"
         >
           <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400">

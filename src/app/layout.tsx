@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Notes App",
+  title: "Lopu Notes",
   description: "Aplikasi catatan dengan fitur tema dan rich text editor",
 };
 
@@ -17,8 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased transition-colors duration-300`}>
-        {/* Pastikan di sini hanya <ThemeProvider> tanpa tambahan apa-apa */}
+      <body 
+        className={`${inter.className} antialiased transition-colors duration-300`} 
+        suppressHydrationWarning
+      >
         <ThemeProvider>
           {children}
         </ThemeProvider>

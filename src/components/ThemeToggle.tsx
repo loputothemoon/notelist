@@ -34,12 +34,11 @@ export default function ThemeToggle() {
       >
         Gelap
       </button>
-      {/* Tombol Warna Wajib Punya onClick ini */}
       <button 
         onClick={() => setTheme("colourful")}
         className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
           theme === "colourful" 
-            ? "bg-white/20 shadow-sm text-white" 
+            ? "bg-white/30 shadow-sm text-black font-bold" 
             : "text-slate-500 dark:text-slate-400 hover:text-slate-200"
         }`}
       >

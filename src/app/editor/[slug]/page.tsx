@@ -7,7 +7,6 @@ export default async function EditNotePage({ params }: { params: Promise<{ slug:
   const { slug } = await params
   const supabase = await createClient()
   
-  // Mencari data di database berdasarkan kolom 'slug'
   const { data: note } = await supabase
     .from('notes')
     .select('*')
