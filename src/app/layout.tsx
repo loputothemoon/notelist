@@ -18,12 +18,8 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${inter.className} antialiased transition-colors duration-300`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          themes={['light', 'dark', 'colourful']}
-        >
+        {/* Pastikan di sini hanya <ThemeProvider> tanpa tambahan apa-apa */}
+        <ThemeProvider>
           {children}
         </ThemeProvider>
       </body>
