@@ -1,22 +1,69 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@variant dark (&:is(.dark *));
 
-/* ... sisa kode kustommu di bawah ini ... */
-
-/* Tampilan tema Colourful (contoh: gradasi ungu ke biru) */
-.colourful {
-  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
-  color: #ffffff;
+/* Custom React Quill Styles */
+.modern-quill .ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid rgba(156, 163, 175, 0.2);
+  padding: 1rem;
+  background-color: transparent;
 }
 
-/* Memastikan elemen lain di dalam tema colourful memiliki kontras yang baik */
-.colourful .card-bg {
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.modern-quill .ql-container.ql-snow {
+  border: none;
+  font-size: 1rem;
+  min-height: 600px;
 }
 
-.colourful .text-muted {
-  color: rgba(255, 255, 255, 0.7);
+.modern-quill .ql-editor {
+  padding: 1.5rem;
+  color: inherit;
+}
+
+/* Penyesuaian Dark Mode untuk Quill */
+.dark .modern-quill .ql-stroke { stroke: #d1d5db; }
+.dark .modern-quill .ql-fill { fill: #d1d5db; }
+.dark .modern-quill .ql-picker { color: #d1d5db; }
+/* =========================================
+   TEMA COLOURFUL (OVERRIDE TAILWIND)
+========================================= */
+/* =========================================
+   TEMA COLOURFUL (OVERRIDE TAILWIND)
+========================================= */
+html.colourful main {
+  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%) !important;
+  color: #000000 !important;
+}
+
+/* Mengubah kotak/card menjadi transparan (Glassmorphism) */
+html.colourful .bg-white,
+html.colourful .dark\:bg-slate-800 {
+  background-color: rgba(255, 255, 255, 0.25) !important; /* Dibuat sedikit lebih solid agar teks hitam lebih jelas */
+  backdrop-filter: blur(12px) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Memaksa semua teks (judul, paragraf, tombol) menjadi hitam */
+html.colourful .text-slate-800,
+html.colourful .text-slate-500,
+html.colourful .text-slate-400,
+html.colourful .text-white,
+html.colourful h1,
+html.colourful h2,
+html.colourful p,
+html.colourful span {
+  color: #000000 !important;
+}
+
+/* Penyesuaian Editor Quill untuk Tema Warna (Ikon & Teks Hitam) */
+html.colourful .modern-quill .ql-toolbar {
+  border-bottom-color: rgba(0, 0, 0, 0.2) !important;
+}
+html.colourful .modern-quill .ql-stroke { stroke: #000000 !important; }
+html.colourful .modern-quill .ql-fill { fill: #000000 !important; }
+html.colourful .modern-quill .ql-picker { color: #000000 !important; }
+html.colourful .modern-quill .ql-picker-options {
+  background-color: rgba(255, 255, 255, 0.9) !important; /* Latar menu dropdown dibuat terang */
+  border-color: rgba(0, 0, 0, 0.2) !important;
 }

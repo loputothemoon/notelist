@@ -1,39 +1,45 @@
 "use server"
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from "@/utils/supabase/server"
+import { redirect } from "next/navigation"
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  const email = formData.get("email") as string
+  const password = formData.get("password") as string
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
 
   if (error) {
-    redirect('/auth?error=Kredensial tidak valid')
+    throw new Error(error.message)
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  // Redirect ke halaman utama setelah login sukses
+  redirect("/")
 }
 
 export async function signup(formData: FormData) {
   const supabase = await createClient()
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  }
 
-  const { error } = await supabase.auth.signUp(data)
+  const email = formData.get("email") as string
+  const password = formData.get("password") as string
+
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      // Sesuaikan URL redirect jika konfirmasi email aktif di Supabase
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/auth/callback`,
+    },
+  })
 
   if (error) {
-    redirect('/auth?error=Gagal mendaftar')
+    throw new Error(error.message)
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  return { success: true }
 }
